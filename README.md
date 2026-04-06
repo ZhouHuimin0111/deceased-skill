@@ -199,30 +199,7 @@ create-ex/
 
 ---
 
-### 推荐的聊天记录导出工具
 
-以下工具为独立的开源项目，本项目不包含它们的代码，仅在解析器中适配了它们的导出格式：
-
-- **[WeChatMsg](https://github.com/LC044/WeChatMsg)** — 微信聊天记录导出（Windows）
-- **[PyWxDump](https://github.com/xaoyaoo/PyWxDump)** — 微信数据库解密导出（Windows）
-- **留痕** — 微信聊天记录导出（macOS）
-## 致敬 & 引用
-
-本项目的架构灵感直接来源于 **[同事.skill](https://github.com/titanwings/colleague-skill)**（by [titanwings](https://github.com/titanwings)）。同事.skill 首创了"把人蒸馏成 AI Skill"的双层架构（Work Skill + Persona），前任.skill 在此基础上将场景从职场迁移到了恋爱关系。致敬原作者的创意和开源精神。
-
-本项目遵循 [AgentSkills](https://agentskills.io) 开放标准，兼容 Claude Code 和 OpenClaw。
-
----
-
-### 推荐的聊天记录导出工具
-
-以下工具为独立的开源项目，本项目不包含它们的代码，仅在解析器中适配了它们的导出格式：
-
-- **[WeChatMsg](https://github.com/LC044/WeChatMsg)** — 微信聊天记录导出（Windows）
-- **[PyWxDump](https://github.com/xaoyaoo/PyWxDump)** — 微信数据库解密导出（Windows）
-- **留痕** — 微信聊天记录导出（macOS）
-
----
 
 ### 写在最后
 人的记忆是一种不讲道理的存储介质。
