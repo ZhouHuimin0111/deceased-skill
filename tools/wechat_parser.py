@@ -178,22 +178,22 @@ def analyze_messages(messages: list, target_name: str) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='微信聊天记录解析器')
+    parser = argparse.ArgumentParser(description='微信原始聊天记录解析器')
     parser.add_argument('--file', required=True, help='输入文件路径')
-    parser.add_argument('--target', required=True, help='前任的名字/昵称')
+    parser.add_argument('--target', required=True, help='目标人物的名字/代号/昵称')
     parser.add_argument('--output', required=True, help='输出文件路径')
     parser.add_argument('--format', default='auto', help='文件格式 (auto/wechatmsg_txt/liuhen/pywxdump/plaintext)')
     
     args = parser.parse_args()
     
     if not os.path.exists(args.file):
-        print(f"错误：文件不存在 {args.file}", file=sys.stderr)
+        print(f"错误：源文件不存在 {args.file}", file=sys.stderr)
         sys.exit(1)
     
     fmt = args.format
     if fmt == 'auto':
         fmt = detect_format(args.file)
-        print(f"自动检测格式：{fmt}")
+        print(f"系统自动检测格式为：{fmt}")
     
     parsers = {
         'wechatmsg_txt': parse_wechatmsg_txt,
@@ -208,11 +208,11 @@ def main():
     os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
     
     with open(args.output, 'w', encoding='utf-8') as f:
-        f.write(f"# 微信聊天记录分析 — {args.target}\n\n")
+        f.write(f"# 微信原数据提取分析 — {args.target}\n\n")
         f.write(f"来源文件：{args.file}\n")
         f.write(f"检测格式：{fmt}\n")
-        f.write(f"总消息数：{result.get('total_messages', 'N/A')}\n")
-        f.write(f"ta的消息数：{result.get('target_messages', 'N/A')}\n\n")
+        f.write(f"提取总消息数：{result.get('total_messages', 'N/A')}\n")
+        f.write(f"目标有效消息数：{result.get('target_messages', 'N/A')}\n\n")
         
         analysis = result.get('analysis', {})
         
@@ -223,27 +223,27 @@ def main():
             f.write("\n")
         
         if analysis.get('top_emojis'):
-            f.write("## 高频 Emoji\n")
+            f.write("## 高频 Emoji / 表情符号\n")
             for emoji, count in analysis['top_emojis']:
                 f.write(f"- {emoji}: {count}次\n")
             f.write("\n")
         
         if analysis.get('punctuation_habits'):
-            f.write("## 标点习惯\n")
+            f.write("## 标点使用习惯\n")
             for punct, count in analysis['punctuation_habits'].items():
                 f.write(f"- {punct}: {count}次\n")
             f.write("\n")
         
-        f.write(f"## 消息风格\n")
-        f.write(f"- 平均消息长度：{analysis.get('avg_message_length', 'N/A')} 字\n")
-        f.write(f"- 风格：{'短句连发型' if analysis.get('message_style') == 'short_burst' else '长段落型'}\n\n")
+        f.write(f"## 基础表达风格\n")
+        f.write(f"- 平均单条消息长度：{analysis.get('avg_message_length', 'N/A')} 字\n")
+        f.write(f"- 宏观风格判定：{'短句连发型' if analysis.get('message_style') == 'short_burst' else '长段落型'}\n\n")
         
         if result.get('sample_messages'):
-            f.write("## 消息样本（前50条）\n")
+            f.write("## 随机提取消息样本（前50条）\n")
             for i, msg in enumerate(result['sample_messages'], 1):
                 f.write(f"{i}. {msg}\n")
     
-    print(f"分析完成，结果已写入 {args.output}")
+    print(f"数据清洗与提取完成，客观特征画像已写入：{args.output}")
 
 
 if __name__ == '__main__':

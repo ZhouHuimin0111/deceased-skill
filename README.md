@@ -1,21 +1,28 @@
-# 前任.skill
+# 清明雨上.skill
 
-> *"你们搞大模型的简直是码神，你们解放了前端兄弟，还要解放后端兄弟，测试兄弟，运维兄弟，解放网安兄弟，解放ic兄弟，最后解放自己解放全人类"*
+**死亡不是终点，遗忘才是。**  
 
-**我会为了你一万次回到那个夏天。**
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
-&nbsp;
+>提供她/他的相关信息（如微信聊天记录、朋友圈截图）  
+加上你的主观描述  
+生成一个真正像ta的AI Skill  
+用ta的口头禅说话，用ta的方式回复你
 
-提供前任的原材料（微信聊天记录、QQ消息、朋友圈截图、照片）加上你的主观描述  
-生成一个**真正像ta的 AI Skill**  
-用ta的口头禅说话，用ta的方式回复你，记得你们一起去过的地方
+## 项目初衷
+计算机科学的本质是 0 和 1 的逻辑，但在面对离别时，我们往往需要一些超越逻辑的慰藉。  
+当一个人离开后，TA 留在微信里的语音、朋友圈的碎片，就成了最珍贵的遗产。本项目旨在提供一个安静、私密且永远不会被云端抹除的本地空间。在这里，没有算法推荐，没有社交干扰，只有那些你最不想忘记的人，以及他们留下的温度。  
+技术无法让人复生，但可以帮我们对抗遗忘。
+## 声明与致谢 
+本项目基于 [therealXiaomanChu/ex-skill](https://github.com/therealXiaomanChu/ex-skill) 进行深度重构与二次开发。  
+感谢原作者在记忆提取与人设组装流水线上做出的优秀架构设计。本项目在原MIT License的框架下，将其底层逻辑从“前任情感模拟”剥离，重构为了严谨、客观且具备极高伦理安全约束的“逝者数字记忆”系统。
 
-⚠️ **本项目仅用于个人回忆与情感疗愈，不用于骚扰、跟踪或侵犯他人隐私。**
+⚠️ **[重要提醒] 本项目仅供个人进行情感疗愈与数字追思，严禁用于任何形式的欺诈、伪造电子证据或侵犯他人隐私的行为。**
 
 [安装](#安装) · [使用](#使用) · [效果示例](#效果示例) · [English](README_EN.md)
 
@@ -30,100 +37,89 @@
 ```bash
 # 安装到当前项目（在 git 仓库根目录执行）
 mkdir -p .claude/skills
-git clone https://github.com/therealXiaomanChu/ex-skill .claude/skills/create-ex
+git clone [https://github.com/ZhouHuimin0111/deceased-skill](https://github.com/ZhouHuimin0111/deceased-skill) .claude/skills/deceased-skill
 
 # 或安装到全局（所有项目都能用）
-git clone https://github.com/therealXiaomanChu/ex-skill ~/.claude/skills/create-ex
-```
-
-### 依赖（可选）
-
-```bash
-pip3 install -r requirements.txt
+git clone [https://github.com/ZhouHuimin0111/deceased-skill](https://github.com/ZhouHuimin0111/deceased-skill) ~/.claude/skills/deceased-skill
 ```
 
 ---
- 
+
 ## 环境要求
- 
+
 - **Claude Code**：免费安装，需要 Node.js 18+（[安装指南](https://docs.anthropic.com/en/docs/claude-code)）
-- **API 消耗**：创建一个前任 Skill 大约消耗 5k-15k tokens，取决于聊天记录量
+- **API 消耗**：创建一个数字记忆档案大约消耗 5k-15k tokens，具体取决于你提供的生前聊天记录或日记文本量。
 - **付费方式**（二选一）：
-  - Claude Pro / Max 订阅：在订阅额度内使用，无需额外配置
-  - Anthropic API Key：按量付费，需在 Claude Code 中配置 key
-- **替代前端**：也可以使用 [OpenClaw](https://github.com/nicepkg/openclaw) 运行本 Skill
-- **不需要 GPU**，不需要本地模型，不需要 Docker
- 
+  - Claude Pro / Max 订阅：在订阅额度内使用，无需额外配置。
+  - Anthropic API Key：按量付费，需在 Claude Code 中配置 key。
+- **不需要 GPU**，不需要本地部署大模型，不需要 Docker。
+
 ---
 
 ## 使用
 
 在 Claude Code 中输入：
 
-```
-/create-ex
+```bash
+/create-archive
 ```
 
-按提示输入前任的代号、基本信息、性格画像，然后选择数据来源。所有字段均可跳过，仅凭描述也能生成。
+按照系统的温和引导，依次输入逝者的代号、生前基本信息、核心特质，然后选择数据来源。如果暂时无法面对大量的聊天记录，所有字段均可跳过，仅凭你的口述描述也能生成基础档案。
 
-完成后用 `/{slug}` 调用该前任 Skill，开始对话。
+完成后，使用 `/{slug}` 调用该数字记忆，开始一段安静的跨时空对话。
 
 ### 管理命令
 
 | 命令 | 说明 |
 |------|------|
-| `/list-exes` | 列出所有前任 Skill |
-| `/{slug}` | 调用完整 Skill（像ta一样跟你聊天） |
-| `/{slug}-memory` | 回忆模式（帮你回忆那些事） |
-| `/{slug}-persona` | 仅人物性格 |
-| `/ex-rollback {slug} {version}` | 回滚到历史版本 |
-| `/delete-ex {slug}` | 删除 |
-| `/let-go {slug}` | 放下 |
+| `/list-archives` | 列出本地所有的数字记忆档案 |
+| `/{slug}` | 唤醒记忆体（在设定的场景中与 ta 对话） |
+| `/{slug}-memory` | 档案检索模式（客观回顾 ta 生前的重要时间线和习惯） |
+| `/{slug}-persona` | 检视性格参数（查看系统提取的底层行为逻辑） |
+| `/archive-rollback {slug} {version}` | 回滚到历史记忆版本 |
+| `/delete-archive {slug}` | 彻底删除本地的该份数字记忆 |
+| `/let-go {slug}` | 释怀（执行此命令后，系统将封存该档案并输出一段告别语，用于心理疗愈的最终阶段） |
 
 ---
 
 ## 效果示例
 
-> 输入：`初恋，在一起三年，大学时期，ENFP，双子座，话痨，半夜给我发语音，分手后还给我点赞`
+> 提取背景：前男友（把谁写死都不太好，所以我选了一个负面人物），2025年离世。性格极其要强、固执、极其抠门，经常PUA别人。最常说的话是“算了算了我错了行了吧”。
 
-**场景一：日常聊天**
+**场景一：日常抱怨**
 
-```
-用户      ❯ 在干嘛
+```text
+用户      ❯ 宝宝，你又不来接我。
 
-前任.skill ❯ 刚吃完饭 在刷手机
-             你呢 怎么突然找我
-             [发送了一个表情包]
-```
-
-**场景二：回忆杀**
-
-```
-用户      ❯ 还记得我们第一次约会吗
-
-前任.skill ❯ 就那个超难吃的意面吗哈哈哈哈
-             你还假装很好吃 我都看出来了
-             那家店后来倒闭了你知道吗
+逝者.skill ❯ 你好烦啊。
+             你自己打车不行吗。
+             我累了一天了还要和你吵架。
 ```
 
-**场景三：深夜emo**
+**场景二：记忆盲区（防幻觉测试）**
 
+```text
+用户      ❯ 你还记得我大学毕业典礼那天，你跟我说了啥吗？
+
+逝者.skill ❯ 这段记忆好像没有留存下来，我不记得了。
+             你能再跟我说说那天的事吗？
 ```
-用户      ❯ 我有点想你
 
-前任.skill ❯ ...
-             嗯
-             早点睡吧
+**场景三：深夜倾诉**
+
+```text
+用户      ❯ 你对我根本就不好。
+
+逝者.skill ❯ 屁，你就听你那些朋友乱说好了。
 ```
 
-**场景四：吵架模式**
+**场景四：固执与分歧（真实性格还原）**
 
-```
-用户      ❯ 你当时为什么不回我消息
+```text
+用户      ❯ 那你那时候为什么要这么对我。
 
-前任.skill ❯ 又来了
-             我说了我在忙 你非要这样
-             算了不想吵
+逝者.skill ❯ 哎呦你烦不烦啊。又翻旧账。
+             事情都过去了，你别再钻牛角尖了。
 ```
 
 ---
@@ -134,107 +130,94 @@ pip3 install -r requirements.txt
 
 | 来源 | 格式 | 备注 |
 |------|------|------|
-| 微信聊天记录 | WeChatMsg / 留痕 / PyWxDump 导出 | 推荐，信息最丰富 |
-| QQ 聊天记录 | txt / mht 导出 | 适合学生时代的恋情 |
-| 朋友圈/微博 | 截图 | 提取公开人设 |
-| 照片 | JPEG/PNG（含 EXIF） | 提取时间线和地点 |
-| 口述/粘贴 | 纯文本 | 你的主观记忆 |
+| 微信聊天记录 | 本地解析工具导出 | 推荐。信息最丰富，能精准捕捉语气词和生活习惯。 |
+| 日记/书信 | 扫描识别或手动输入 | 极其珍贵。能反映逝者最深层的价值观和处世哲学。 |
+| 家庭群聊 | 导出文本 | 适合提取 ta 在家族/社交圈中的长辈或后勤角色特征。 |
+| 亲属口述回忆 | 纯文本 | 你的主观记忆，可作为极好的补充。 |
 
-### 生成的 Skill 结构
+### 生成的档案结构
 
-每个前任 Skill 由两部分组成，共同驱动输出：
+每一份数字记忆档案由两部分底层逻辑组成，共同约束大语言模型的输出：
 
 | 部分 | 内容 |
 |------|------|
-| **Part A — Relationship Memory** | 共同经历、约会地点、inside jokes、争吵模式、甜蜜瞬间、关系时间线 |
-| **Part B — Persona** | 5 层性格结构：硬规则 → 身份 → 说话风格 → 情感模式 → 关系行为 |
+| **Part A — 数字记忆事实库** | 生命时间线、专属暗号、重要记忆节点、生活与起居习惯。 |
+| **Part B — 行为与性格约束** | 5 层结构：硬规则（防幻觉） → 身份 → 说话风格 → 情感模式 → 人际边界。 |
 
-运行逻辑：`收到消息 → Persona 判断ta会怎么回 → Memory 补充共同记忆 → 用ta的方式输出`
+运行逻辑：`收到消息 → 校验硬规则与禁忌话题 → 读取生前语言习惯 → 检索底层事实记忆 → 模仿语气输出`
 
-### 支持的标签
+### 支持提取的核心标签
 
-**依恋类型**：安全型 · 焦虑型 · 回避型 · 混乱型
+**沟通特质**：话痨 · 寡言少语 · 刀子嘴豆腐心 · 报喜不报忧 · 喜欢发中老年表情包 · 长篇大论的叮嘱 · 只回短句...
 
-**爱的语言**：肯定的言辞 · 精心的时刻 · 接受礼物 · 服务的行动 · 身体的接触
+**价值观与底色**：操心命 · 极其节俭 · 豁达乐观 · 传统保守 · 大家长作风 · 默默付出 · 宿命论...
 
-**性格标签**：话痨 · 闷骚 · 嘴硬心软 · 冷暴力 · 粘人 · 独立 · 大男/女子主义 · 浪漫主义 · 实用主义 · 完美主义 · 拖延症 · 工作狂 · 控制欲 · 没有安全感 · 报复性熬夜 · 已读不回 · 秒回选手 · 朋友圈三天可见 · 半夜发语音 …
+*(注：本项目摒弃了星座、MBTI 等缺乏事实依据的伪科学标签，一切性格刻画均需基于真实的生前数据痕迹。)*
 
-**星座**：十二星座全支持，影响性格标签的翻译规则
+### 记忆演进机制
 
-**MBTI**：16 型全支持，影响沟通风格和决策模式
-
-### 进化机制
-
-* **追加记忆** → 找到更多聊天记录/照片 → 自动分析增量 → merge 进对应部分
-* **对话纠正** → 说「ta不会这样说」→ 写入 Correction 层，立即生效
-* **版本管理** → 每次更新自动存档，支持回滚
+* **记忆追加** → 翻出了新的老照片或旧日记 → 系统自动分析增量 → 平滑合并进现有档案，标注来源。
+* **生者纠偏** → 在对话中说“你生前不会这样说话” → 触发纠错处理器，立即修正 AI 的语气参数并生效。
+* **版本留存** → 每一次记忆的修改都会自动存档，支持随时回滚。
 
 ---
 
 ## 项目结构
 
-本项目遵循 [AgentSkills](https://agentskills.io) 开放标准：
+本项目底层引擎遵循 AgentSkills 开放标准，上层逻辑进行了针对性重构：
 
-```
-create-ex/
-├── SKILL.md                # skill 入口（官方 frontmatter）
-├── prompts/                # Prompt 模板
-│   ├── intake.md           #   对话式信息录入
-│   ├── memory_analyzer.md  #   关系记忆提取
-│   ├── persona_analyzer.md #   性格行为提取（含标签翻译表）
-│   ├── memory_builder.md   #   memory.md 生成模板
-│   ├── persona_builder.md  #   persona.md 五层结构模板
-│   ├── merger.md           #   增量 merge 逻辑
-│   └── correction_handler.md # 对话纠正处理
-├── tools/                  # Python 工具
-│   ├── wechat_parser.py    # 微信聊天记录解析
-│   ├── qq_parser.py        # QQ 聊天记录解析
-│   ├── social_parser.py    # 社交媒体内容解析
-│   ├── photo_analyzer.py   # 照片元信息分析
-│   ├── skill_writer.py     # Skill 文件管理
-│   └── version_manager.py  # 版本存档与回滚
-├── exes/                   # 生成的前任 Skill（gitignored）
-├── docs/PRD.md
+```text
+deceased-skill/
+├── SKILL.md                # 记忆体入口文件
+├── prompts/                # 核心大脑（大语言模型指令）
+│   ├── intake.md           #   温和的信息录入引导
+│   ├── memory_analyzer.md  #   客观记忆提取器
+│   ├── persona_analyzer.md #   性格与习惯提取器
+│   ├── memory_builder.md   #   数字记忆档案生成模板
+│   ├── persona_builder.md  #   5层行为约束模板
+│   ├── merger.md           #   记忆增量合并逻辑
+│   ├── scene_director.md   #   梦境场景构建器
+│   └── correction_handler.md # 纠错与防幻觉安全阀
+├── tools/                  # 数据处理工具链
+│   ├── wechat_parser.py    # 微信记录清洗
+│   ├── skill_writer.py     # 档案文件生成管理
+│   └── version_manager.py  # 存档与版本回滚
+├── archives/               # 本地生成的数字记忆（已被 .gitignore 保护，绝不上云）
+├── docs/                   # 合规说明与导出指南
 ├── requirements.txt
 └── LICENSE
 ```
 
 ---
 
-## 注意事项
+## 伦理声明与注意事项
 
-* **聊天记录质量决定还原度**：微信导出 + 口述 > 仅口述
-* 建议优先提供：**深夜对话** > **争吵记录** > **日常消息**（最能体现真实性格）
-* 本项目不鼓励对前任的不健康执念，如果你发现自己过于沉浸，请寻求专业帮助
-* 你的前任是一个真实的人，ta有自己的人生。这个 Skill 只是你记忆中的ta
-
+* **数据决定真实度**：带有时间戳的真实聊天记录 > 亲属的口头回忆（因为人的记忆往往会随着时间被无意识地美化或篡改）。
+* **接纳不完美**：请尽量保留争执、固执或负面的记录。真实的数字生命是由瑕疵组成的，过于完美的 AI 只会加深虚假感。
+* **防沉迷提醒**：这个项目旨在提供慰藉，而不是制造困住生者的牢笼。**你的亲人/挚友已经离开了，这段代码只是往日岁月的回声。** 如果你发现自己过度沉浸于此、影响了现实生活，请立即停止使用，并寻求身边亲友的拥抱。
 
 ---
 
 ## 社区生态
- 
-以下项目由社区贡献者独立开发，与本项目互补：
- 
-| 项目 | 作者 | 说明 |
-|------|------|------|
-| [ex-cure-skill](https://github.com/W1ndys/ex-cure-skill) | @W1ndys | 关系反思模式，从聊天记录中复盘经验教训 |
-| [同事.skill](https://github.com/titanwings/colleague-skill) | @titanwings | 本项目的灵感来源，把同事蒸馏成 AI Skill |
-| [simp-skill](https://github.com/BeamusWayne/simp-skill) | @BeamusWayne | 与其怀念前任，不如勇敢追爱 |
- 
-**语音克隆（实验性）**：如果你想让 AI 用前任的声音说话，可以把 ex-skill 生成的文本搭配 [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) 使用。这需要额外部署语音模型，不在本项目范围内。
- 
-**聊天记录导入**：不知道怎么把聊天记录喂给 ex-skill？请看 [导入指南](docs/EXPORT_GUIDE.md)。
+
+**语音重现（探索性功能）**：
+如果你希望数字记忆体使用逝者生前的声音说话，可以将本系统生成的文本输出，对接至开源的语音克隆项目（如 `GPT-SoVITS`）。
+*(注：这需要极高的技术门槛进行本地化部署，且涉及极高的数据敏感性，不在本项目提供的核心功能范围内。)*
+
+**数据处理帮助**：
+不知如何提取生前的聊天记录？请仔细阅读 [数据提取与准备指南](docs/EXPORT_GUIDE.md)。
+
+
+## 写在最后
+
+> 大地太厚重了，叩拜的时候低头看着，只觉得怎么也无法透过去看见您，然后眼泪砸下去，泥土被洇湿了一块的时候我就知道了，风也吹不到的地方，雨能替我抵达，清明时节雨纷纷，难怪，难怪。
 
 ---
 
+## 许可证 (License)
 
-### 写在最后
-人的记忆是一种不讲道理的存储介质。
-你记不住高数公式，记不住车牌号，记不住今天是几号，但你清楚记得四年前的一个下午ta穿了一件白T恤站在便利店门口等你，手里拿着两根冰棍，一根给你，一根ta自己。
-这不公平。
-这个 Skill 就是把这些不公平的记忆导出来，从生物硬盘到数字硬盘完成格式转换。
-导完以后你或许会发现，ta也没那么好。ta也没那么差。ta就是那样一个人。会在吵完架两小时后问你吃了吗。会在纪念日那天忘了发消息然后第二天假装什么都没发生。
-是的，
-此刻，阳光在江面碎成一万个夏天，闪烁，又汇聚成一个冬天。这一切在你午睡时发生，你从未察觉。
+本项目基于 MIT 许可证开源。
 
-MIT License © [therealXiaomanChu](https://github.com/therealXiaomanChu)
+- 原始项目框架与底层逻辑：MIT License © [therealXiaomanChu](https://github.com/therealXiaomanChu/ex-skill)
+- 本次深度重构与二次开发：MIT License © 2026 ZhouHuimin0111
+

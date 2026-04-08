@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""QQ 聊天记录解析器
+"""QQ 原始聊天记录解析器
 
 支持格式：
 - QQ 消息管理器导出的 txt 格式
@@ -91,15 +91,15 @@ def parse_qq_mht(file_path: str, target_name: str) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='QQ 聊天记录解析器')
+    parser = argparse.ArgumentParser(description='QQ 原始聊天记录解析器')
     parser.add_argument('--file', required=True, help='输入文件路径')
-    parser.add_argument('--target', required=True, help='前任的名字/昵称')
+    parser.add_argument('--target', required=True, help='目标人物的名字/代号/昵称')
     parser.add_argument('--output', required=True, help='输出文件路径')
     
     args = parser.parse_args()
     
     if not os.path.exists(args.file):
-        print(f"错误：文件不存在 {args.file}", file=sys.stderr)
+        print(f"错误：源文件不存在 {args.file}", file=sys.stderr)
         sys.exit(1)
     
     ext = Path(args.file).suffix.lower()
@@ -110,19 +110,19 @@ def main():
     
     os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
     with open(args.output, 'w', encoding='utf-8') as f:
-        f.write(f"# QQ 聊天记录分析 — {args.target}\n\n")
-        f.write(f"总消息数：{result.get('total_messages', 'N/A')}\n")
-        f.write(f"ta的消息数：{result.get('target_messages', 'N/A')}\n\n")
+        f.write(f"# QQ 原数据提取分析 — {args.target}\n\n")
+        f.write(f"提取总消息数：{result.get('total_messages', 'N/A')}\n")
+        f.write(f"目标有效消息数：{result.get('target_messages', 'N/A')}\n\n")
         
         if result.get('sample_messages'):
-            f.write("## 消息样本\n")
+            f.write("## 随机提取消息样本（前50条）\n")
             for i, msg in enumerate(result['sample_messages'], 1):
                 f.write(f"{i}. {msg}\n")
         elif result.get('raw_text'):
             f.write("## 原始文本（截取）\n\n")
             f.write(result['raw_text'][:10000])
     
-    print(f"分析完成，结果已写入 {args.output}")
+    print(f"数据清洗与提取完成，客观特征画像已写入：{args.output}")
 
 
 if __name__ == '__main__':
